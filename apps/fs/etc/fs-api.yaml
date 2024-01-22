@@ -1,3 +1,10 @@
 Name: fs-api
 Host: 0.0.0.0
-Port: 8888
+Port: 5001
+
+JwtAuth:
+  AccessSecret: 845d93df-3077-4b1a-b774-fed374d5ab10
+  AccessExpire: 31536000
+
+DB:
+  DataSource: root:123456@tcp(mysql:3306)/cloud_disk?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

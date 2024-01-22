@@ -58,7 +58,7 @@ type (
 	group:  file
 	jwt:    JwtAuth
 )
-service file-api {
+service fs-api {
 	@handler UserFileDetail
 	post /user_file_detail (UserFileDetailReq) returns (UserFileDetailResp)
 
@@ -118,7 +118,7 @@ type (
 	group:  directory
 	jwt:    JwtAuth
 )
-service file-api {
+service fs-api {
 	@handler UserDirectoryList
 	post /user_directory_list (UserDirectoryListReq) returns (UserDirectoryListResp)
 
