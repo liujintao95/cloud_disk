@@ -1,0 +1,137 @@
+syntax = "v1"
+
+info (
+	title:   "文件系统"
+	desc:    "文件系统"
+	author:  "jintao liu"
+	version: "v1"
+)
+
+type File {
+	Id     int64  `json:"id"`
+	Name   string `json:"name"`
+	Size   string `json:"size"`
+	Ext    string `json:"ext"`
+	Hash   string `json:"hash"`
+	Status string `json:"status"`
+}
+
+type Directory {
+	Id       int64  `json:"id"`
+	Name     string `json:"name"`
+	ParentId string `json:"parentId"`
+}
+
+type (
+	UserFileDetailReq {
+		FileId int64 `json:"fileId"`
+	}
+	UserFileDetailResp {
+		File File `json:"file"`
+	}
+)
+
+type (
+	RenameFileReq {
+		FileId int64  `json:"fileId"`
+		Rename string `json:"rename"`
+	}
+	RenameFileResp  {}
+)
+
+type (
+	MoveFileReq {
+		DirId int64 `json:"dirId"`
+	}
+	MoveFileResp  {}
+)
+
+type (
+	DeleteFileReq {
+		FileId int64 `json:"fileId"`
+	}
+	DeleteFileResp  {}
+)
+
+@server (
+	prefix: api/v1/file
+	group:  file
+	jwt:    JwtAuth
+)
+service file-api {
+	@handler UserFileDetail
+	post /user_file_detail (UserFileDetailReq) returns (UserFileDetailResp)
+
+	@handler RenameFile
+	post /rename_file (RenameFileReq) returns (RenameFileResp)
+
+	@handler MoveFile
+	post /move_file (MoveFileReq) returns (MoveFileResp)
+
+	@handler DeleteFile
+	post /delete_file (DeleteFileReq) returns (DeleteFileResp)
+}
+
+type (
+	UserDirectoryListReq {
+		ParentId int64 `json:"parentId"`
+	}
+	UserDirectoryListResp {
+		FileList      []File      `json:"fileList"`
+		DirectoryList []Directory `json:"directoryList"`
+	}
+)
+
+type (
+	CreateDirectoryReq {
+		ParentId int64  `json:"parentId"`
+		Name     string `json:"name"`
+	}
+	CreateDirectoryResp  {}
+)
+
+type (
+	RemaneDirectoryReq {
+		DirId  int64  `json:"dirId"`
+		Rename string `json:"rename"`
+	}
+	RemaneDirectoryResp  {}
+)
+
+type (
+	MoveDirectoryReq {
+		ParentId int64 `json:"parentId"`
+	}
+	MoveDirectoryResp  {}
+)
+
+type (
+	DeleteDirectoryReq {
+		DirId int64 `json:"dirId"`
+		Force bool  `json:"force"`
+	}
+	DeleteDirectoryResp  {}
+)
+
+@server (
+	prefix: api/v1/file
+	group:  directory
+	jwt:    JwtAuth
+)
+service file-api {
+	@handler UserDirectoryList
+	post /user_directory_list (UserDirectoryListReq) returns (UserDirectoryListResp)
+
+	@handler CreateDirectory
+	post /create_directory (CreateDirectoryReq) returns (CreateDirectoryResp)
+
+	@handler RemaneDirectory
+	post /rename_directory (RemaneDirectoryReq) returns (RemaneDirectoryResp)
+
+	@handler MoveDirectory
+	post /move_directory (MoveDirectoryReq) returns (MoveDirectoryResp)
+
+	@handler DeleteDirectory
+	post /delete_directory (DeleteDirectoryReq) returns (DeleteDirectoryResp)
+}
+
