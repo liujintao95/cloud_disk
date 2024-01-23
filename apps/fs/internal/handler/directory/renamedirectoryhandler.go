@@ -9,16 +9,16 @@ import (
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 
-func RemaneDirectoryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
+func RenameDirectoryHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var req types.RemaneDirectoryReq
+		var req types.RenameDirectoryReq
 		if err := httpx.Parse(r, &req); err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
 
-		l := directory.NewRemaneDirectoryLogic(r.Context(), svcCtx)
-		resp, err := l.RemaneDirectory(&req)
+		l := directory.NewRenameDirectoryLogic(r.Context(), svcCtx)
+		resp, err := l.RenameDirectory(&req)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 		} else {

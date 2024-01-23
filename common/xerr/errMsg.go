@@ -14,6 +14,8 @@ func init() {
 	message[USER_MOBILE_PWD_ERROR] = "账号或密码不正确"
 	message[USER_ALREADY_EXISTS] = "用户已存在"
 	message[USER_NOT_EXISTS] = "用户不存在"
+	message[DIR_ALREADY_EXISTS] = "存在同名文件夹"
+	message[DIR_NOT_EXISTS] = "文件夹不存在"
 }
 
 func MapErrMsg(errcode uint32) string {

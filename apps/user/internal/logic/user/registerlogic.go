@@ -43,7 +43,7 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (resp *types.RegisterRe
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "数据库查询错误:%v, 手机号:%+v", err, req.Mobile)
 	}
 	if user != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.USER_ALREADY_EXISTS), "该手机号已被注册:%s,err:%v", req.Mobile, err)
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.USER_ALREADY_EXISTS), "该手机号已被注册:%s", req.Mobile)
 	}
 	user = new(model.User)
 	user.Mobile = req.Mobile

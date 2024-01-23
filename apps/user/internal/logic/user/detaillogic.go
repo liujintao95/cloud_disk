@@ -31,16 +31,17 @@ func NewDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DetailLogi
 func (l *DetailLogic) Detail(req *types.UserInfoReq) (resp *types.UserInfoResp, err error) {
 	// todo: add your logic here and delete this line
 	var (
+		userId   int64
 		user     *model.User
 		respUser types.User
 	)
-	userId := ctxdata.GetUidFromCtx(l.ctx)
+	userId = ctxdata.GetUidFromCtx(l.ctx)
 	user, err = l.svcCtx.UserModel.FindOne(l.ctx, userId)
 	if err != nil && !errors.Is(err, model.ErrNotFound) {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "获取登录用户信息失败:%v, id:%d", err, userId)
 	}
 	if user == nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.USER_NOT_EXISTS), "用户ID:%d", userId)
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.USER_NOT_EXISTS), "用户不存在，ID:%d", userId)
 	}
 	_ = copier.Copy(&respUser, user)
 	resp.UserInfo = respUser

@@ -10,7 +10,7 @@ info (
 type File {
 	Id     int64  `json:"id"`
 	Name   string `json:"name"`
-	Size   string `json:"size"`
+	Size   int64  `json:"size"`
 	Ext    string `json:"ext"`
 	Hash   string `json:"hash"`
 	Status string `json:"status"`
@@ -19,7 +19,7 @@ type File {
 type Directory {
 	Id       int64  `json:"id"`
 	Name     string `json:"name"`
-	ParentId string `json:"parentId"`
+	ParentId int64  `json:"parentId"`
 }
 
 type (
@@ -41,7 +41,8 @@ type (
 
 type (
 	MoveFileReq {
-		DirId int64 `json:"dirId"`
+		FileId int64 `json:"fileId"`
+		DirId  int64 `json:"dirId"`
 	}
 	MoveFileResp  {}
 )
@@ -91,15 +92,16 @@ type (
 )
 
 type (
-	RemaneDirectoryReq {
+	RenameDirectoryReq {
 		DirId  int64  `json:"dirId"`
 		Rename string `json:"rename"`
 	}
-	RemaneDirectoryResp  {}
+	RenameDirectoryResp  {}
 )
 
 type (
 	MoveDirectoryReq {
+		DirId    int64 `json:"dirId"`
 		ParentId int64 `json:"parentId"`
 	}
 	MoveDirectoryResp  {}
@@ -125,8 +127,8 @@ service fs-api {
 	@handler CreateDirectory
 	post /create_directory (CreateDirectoryReq) returns (CreateDirectoryResp)
 
-	@handler RemaneDirectory
-	post /rename_directory (RemaneDirectoryReq) returns (RemaneDirectoryResp)
+	@handler RenameDirectory
+	post /rename_directory (RenameDirectoryReq) returns (RenameDirectoryResp)
 
 	@handler MoveDirectory
 	post /move_directory (MoveDirectoryReq) returns (MoveDirectoryResp)

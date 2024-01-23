@@ -24,7 +24,8 @@ func NewDeleteDirectoryLogic(ctx context.Context, svcCtx *svc.ServiceContext) *D
 }
 
 func (l *DeleteDirectoryLogic) DeleteDirectory(req *types.DeleteDirectoryReq) (resp *types.DeleteDirectoryResp, err error) {
-	// todo: add your logic here and delete this line
+	// 判断是否是强制，如果不是判断是否有子文件或子目录，有则报错，没有则删除
+	// 如果强制递归删除子文件和目录
 
 	return
 }

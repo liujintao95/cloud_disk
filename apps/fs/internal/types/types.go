@@ -27,19 +27,20 @@ type DeleteFileResp struct {
 type Directory struct {
 	Id       int64  `json:"id"`
 	Name     string `json:"name"`
-	ParentId string `json:"parentId"`
+	ParentId int64  `json:"parentId"`
 }
 
 type File struct {
 	Id     int64  `json:"id"`
 	Name   string `json:"name"`
-	Size   string `json:"size"`
+	Size   int64  `json:"size"`
 	Ext    string `json:"ext"`
 	Hash   string `json:"hash"`
 	Status string `json:"status"`
 }
 
 type MoveDirectoryReq struct {
+	DirId    int64 `json:"dirId"`
 	ParentId int64 `json:"parentId"`
 }
 
@@ -47,18 +48,19 @@ type MoveDirectoryResp struct {
 }
 
 type MoveFileReq struct {
-	DirId int64 `json:"dirId"`
+	FileId int64 `json:"fileId"`
+	DirId  int64 `json:"dirId"`
 }
 
 type MoveFileResp struct {
 }
 
-type RemaneDirectoryReq struct {
+type RenameDirectoryReq struct {
 	DirId  int64  `json:"dirId"`
 	Rename string `json:"rename"`
 }
 
-type RemaneDirectoryResp struct {
+type RenameDirectoryResp struct {
 }
 
 type RenameFileReq struct {

@@ -32,7 +32,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/rename_directory",
-				Handler: directory.RemaneDirectoryHandler(serverCtx),
+				Handler: directory.RenameDirectoryHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
