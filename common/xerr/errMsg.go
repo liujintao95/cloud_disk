@@ -16,6 +16,7 @@ func init() {
 	message[USER_NOT_EXISTS] = "用户不存在"
 	message[DIR_ALREADY_EXISTS] = "存在同名文件夹"
 	message[DIR_NOT_EXISTS] = "文件夹不存在"
+	message[DATA_LOCKED] = "数据被锁定"
 }
 
 func MapErrMsg(errcode uint32) string {
